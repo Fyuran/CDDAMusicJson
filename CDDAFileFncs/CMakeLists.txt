@@ -11,8 +11,8 @@ target_link_libraries(CDDAFileFncs PUBLIC ${wxWidgets_LIBRARIES})
 
 if(WIN32)
 	FetchContent_Declare(json URL https://github.com/nlohmann/json/archive/refs/tags/v3.11.3.zip)
-elseif(LINUX)
-	FetchContent_Declare(json URL https://github.com/nlohmann/json/archive/refs/tags/v3.11.3.tar.gz)
+elseif(UNIX)
+	FetchContent_Declare(json URL https://github.com/nlohmann/json/releases/download/v3.11.3/json.tar.xz)
 endif()
 
 FetchContent_MakeAvailable(json)

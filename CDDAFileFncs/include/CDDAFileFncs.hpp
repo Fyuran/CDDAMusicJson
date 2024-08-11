@@ -10,7 +10,7 @@ namespace cdda {
 
 	struct File {
 		fs::path path;
-		uint_fast8_t volume{ 0 };
+		uint_fast8_t volume{ 100 };
 	};
 
 	class MusicSet {
@@ -20,8 +20,8 @@ namespace cdda {
 		std::vector<File> files;
 
 	public:
-		__declspec(dllexport) MusicSet();
-		__declspec(dllexport) MusicSet(bool shuffle);
+		MusicSet();
+		MusicSet(bool shuffle);
 		MusicSet(bool shuffle, std::vector<File> files);
 		MusicSet(const MusicSet& other);
 		MusicSet(MusicSet&& other) noexcept;
@@ -35,17 +35,17 @@ namespace cdda {
 		bool getShuffle() const;
 		const std::vector<File>& getFiles() const;
 		void setFiles(std::vector<File> files);
-		__declspec(dllexport) void addFile(fs::path path, uint_fast8_t volume = 100);
+		void addFile(fs::path path, uint_fast8_t volume = 100);
 		void addFile(File file);
-		__declspec(dllexport) void getMusic(fs::path path = fs::current_path());
+		void getMusic(fs::path path = fs::current_path());
 	};
 
-	__declspec(dllexport) void to_json(nlohmann::json& j, const MusicSet& ms);
-	__declspec(dllexport) void from_json(const nlohmann::json& j, MusicSet& ms);
+	void to_json(nlohmann::json& j, const MusicSet& ms);
+	void from_json(const nlohmann::json& j, MusicSet& ms);
 	void to_json(nlohmann::json& j, const File& file);
 	void from_json(const nlohmann::json& j, File& file);
 
-	__declspec(dllexport) void writeMusicSet(const MusicSet& ms, fs::path path = fs::current_path());
+	void writeMusicSet(const MusicSet& ms, fs::path path = fs::current_path());
 
 	const inline std::array<std::string, 7> validExt = { ".ogg", ".wav", ".mp3", ".m4p", ".flac", ".dss", ".aac" };
 
